@@ -1,0 +1,25 @@
+$header-bg: #4e63c2;
+$main-bg: #3f3e3e;
+$content-bg: #6b6b6bab;
+$text-color: #c9c9c9;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  color: $text-color;
+  font-family: sans-serif;
+}
+
+.btn, input {
+  border: none;
+  outline: none;
+}
+
+.btn {
+  cursor: pointer;
+}
+

@@ -1,0 +1,61 @@
+<header>
+  <p class="title">Список дел</p>
+  <button class="btn change-color"></button>
+</header>
+
+<main>
+  <div class="content">
+    <div class="content-inner">
+      <div class="date">01 мая 2019 г.</div>
+      <div class="count-case">{{ listCase.length }} Задач</div>
+
+      <form action="/" method="post" (submit)="addCase(); caseName = ''">
+        <label for="name">Введите название задачи</label>
+        <input
+          [(ngModel)]="caseName"
+          type="text"
+          name="name"
+          autofocus
+          autocomplete="off"
+        />
+        <div class="bar"></div>
+      </form>
+
+      <ng-container *ngIf="listCase.length">
+        <p class="case-title">Ваши задачи</p>
+        <div class="case-list">
+          <div class="case-item" *ngFor="let case of listCase">
+            <input
+              type="checkbox"
+              [checked]="case['done']"
+              (change)="toggleTodo(case['id'])"
+              [style.opacity]="case['done'] ? 0 : 1 "
+            />
+            <div class="case-content">
+              <p
+                class="case-name"
+                [ngStyle]="{
+                  'text-decoration': case['done'] ? 'line-through' : 'none'
+                }"
+              >
+                {{ case["title"] }}
+              </p>
+              <p class="case-descr">
+                Добавлено в:
+                {{ case["createdAt"] | dateFormat: true }} (изменено)
+                {{ case["updatedAt"] | dateFormat: true }})
+              </p>
+            </div>
+            <button (click)="deleteCase(case['id'])" class="btn btn-remove">
+              <span>X</span>
+            </button>
+          </div>
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="!listCase.length">
+        <p class="no-result">У вас 0 задач, добавьте новую</p>
+      </ng-container>
+    </div>
+  </div>
+</main>
